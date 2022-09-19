@@ -242,8 +242,9 @@ div .resizable {
   width: 3.75rem;
 }
 
-#sidebar-airdrop {
-  display: block;
+#sidebar-file-system {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #sidebar-recents {
@@ -818,6 +819,24 @@ button:hover {
       border-bottom-right-radius: 2%;
       margin: 0 auto;
       padding: 1px;
+      overflow-y: auto;
+
+      .cli {
+        width: 100%;
+        display: flex;
+      }
+
+      .cli > input {
+        flex: 1;
+        border: none;
+        color: white;
+        font-weight: bold;
+        margin-left: 0.5rem;
+        border-color: inherit;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        background-color: transparent;
+      }
   }
   .font {
       color: #fff;
@@ -825,5 +844,45 @@ button:hover {
       font-size: 15px;
       text-align: left;
       position: static;
+  }
+
+  .text-error {
+    color: red;
+    opacity: 0.7;
+    font-size: 12px;
+    margin-left: 0.5rem;
+    text-align: left;
+    font-style: italic;
+  }
+  .text-success {
+    color: rgb(1, 251, 5);
+    opacity: 0.7;
+    font-size: 12px;
+    margin-left: 0.5rem;
+    text-align: left;
+    font-style: italic;
+  }
+
+  .response-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-size: 12px;
+      letter-spacing: 0;
+    }
+
+    .file, .folder {
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .name {
+      font-weight: bold;
+      color: cyan;
+    }
+    .size, .content {
+      font-weight: bold;
+      color: yellow;
+    }
   }
 }

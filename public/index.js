@@ -2,7 +2,6 @@
 $(document).ready(function () {
     //draggable function
     $(function () {
-        console.log($("#position-box"))
         $("#position-box").draggable();
     });
     $(function () {

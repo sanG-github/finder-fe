@@ -2,7 +2,7 @@ import Terminal from '../Terminal'
 
 function HomePage() {
   return (
-    <body>
+    <div>
         <div className="menu-bar">
             <div className="stripe">
                 <div className="menu-items-left">
@@ -408,7 +408,7 @@ function HomePage() {
                                         <div className="item-align-right">⇧⌘C</div>
                                     </li>
                                     <li>
-                                        <div><img src="images/menu/airdrop.png" alt="" className="sidebar-icons"/> Air Drop
+                                        <div><img src="images/menu/airdrop.png" alt="" className="sidebar-icons"/> File system
                                         </div>
                                         <div className="item-align-right">⇧⌘R</div>
                                     </li>
@@ -590,7 +590,7 @@ function HomePage() {
                                     Favourites
                                 </div>
                                 <div className="item-selected">
-                                    <img src="images/menu/airdrop.png" alt=""/><a href="#">AirDrop</a>
+                                    <img src="images/menu/airdrop.png" alt=""/><a href="#">File system</a>
                                 </div>
                                 <div className="item-selected">
                                     <img src="images/menu/recents.png" alt=""/><a href="#">Recents</a>
@@ -632,8 +632,11 @@ function HomePage() {
                         </div>
                     </div>
                     <div className="box-main" id="main-box">
-                        <div id="sidebar-airdrop" className="app-layout hide">
-                            <div className="align-center"><img src="images/apps/air.png" alt=""/>AirDrop</div>
+                        <div id="sidebar-file-system" className="app-layout hide">
+                            <div className="align-center"><img src="images/folder-icon.png" alt=""/>File system</div>
+                            <div className="align-center"><img src="images/folder-icon.png" alt=""/>File system</div>
+                            <div className="align-center"><img src="images/folder-icon.png" alt=""/>File system</div>
+                            <div className="align-center"><img src="images/folder-icon.png" alt=""/>File system</div>
                         </div>
                         <div id="sidebar-recents" className="app-layout hide">
                             <div className="align-center"><img src="images/apps/recents/camera.svg" alt=""/>Camera</div>
@@ -646,7 +649,7 @@ function HomePage() {
                         <div id="sidebar-applications" className="app-layout hide">
                             <div className="align-center"><img src="images/apps/ae.png" alt=""/>Adobe After Effects CC 2019
                             </div>
-                            <div className="align-center"><img src="images/apps/air.png" alt=""/>AirDrop</div>
+                            <div className="align-center"><img src="images/apps/air.png" alt=""/>File system</div>
                             <div className="align-center"><img src="images/apps/backup.png" alt=""/>Time Machine</div>
                             <div className="align-center"><img src="images/apps/bitcoin.png" alt=""/>Bitcoin</div>
                             <div className="align-center"><img src="images/apps/book.png" alt=""/>Books</div>
@@ -710,7 +713,7 @@ function HomePage() {
                 </nav>
             </div>
         </div>
-    </body>
+    </div>
   );
 }
 
