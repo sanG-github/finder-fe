@@ -1,18 +1,24 @@
-import {useState} from 'react';
-
+import {useState, useRef} from 'react';
+import callApi from '../../services/callApi';
 
 function Terminal() {
     const [commands, setCommands] = useState([]);
 	const [cmd, setCmd] = useState("");
+    const inputRef = useRef();
 
-    const handleOnKeyDown = (e) => {
+    const handleOnKeyDown = async (e) => {
         if (e.key !== 'Enter') return;
-
-		const newCommands = [...commands]
-		newCommands.push(e.target.value);
-
 		setCmd("");
-		setCommands(newCommands);
+
+        const cmd = e.target.value;
+        const result = await callApi(cmd);
+		const newCommands = [...commands]
+        const newCommand = {cmd: cmd, result: result};
+		
+        newCommands.push(newCommand);
+        setCommands(newCommands);
+
+        window.scrollTo(inputRef)
     }
 
 	const handleOnChange = (e) => {
@@ -31,24 +37,28 @@ function Terminal() {
             </div>
             <div id="screen">
                 {
-                    commands.map((cmd, idx) => {
+                    commands.map((obj, idx) => {
                         return (
-							<p className="font cli" key={idx}>
-								root@10.0.0.1:~$
-								<input className="font" defaultValue={cmd} />
-							</p>
+                            <div key={idx} className="font">
+                                <p className="cli">
+                                    root@10.0.0.1:~$
+                                    <input className="font" defaultValue={obj.cmd} disabled />
+                                </p>
+                                {obj.result}
+                            </div>
 						)
                     })
                 }
 
 				<p className="font cli">
 					root@10.0.0.1:~$
-					<input 
+					<input
+                        ref={inputRef}
 						className="font" 
 						autoFocus={true} 
 						onChange={(e) => handleOnChange(e)} 
 						onKeyDown={(e) => handleOnKeyDown(e)}
-						value={cmd} 
+						value={cmd}
 					/>
 				</p>
             </div>
