@@ -18,5 +18,9 @@ export default {
     "rm": {
         method: "DELETE",
         url: "/resources/rm"
+    },
+    "roots": {
+        method: "GET",
+        url: "/folders/roots"
     }
 }
