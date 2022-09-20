@@ -84,9 +84,12 @@ async function callApi(command) {
     return response;
 }
 
-export async function fetchFolder(folder_name) {
-    let command = "ls " + folder_name;
+export async function fetchFolder(folder_name, isSearch = false) {
+    let command = '';
     let api_info = {};
+    
+    if(isSearch) command = "find " + folder_name + " /";
+    else command = "ls " + folder_name
 
     if(!folder_name){
         api_info = parseCommand("roots");

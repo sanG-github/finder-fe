@@ -2,9 +2,9 @@ import {useState, useEffect} from 'react';
 import {fetchFolder} from '../../services/callApi';
 
 function SystemSideBar(props) {
-    const [folders, setFolders] = useState([]);
-    const [files, setFiles] = useState([]);
-    const {currentPath, setCurrentPath} = props;
+    const [folders, setFolders] = useState(props.folders || []);
+    const [files, setFiles] = useState(props.files || []);
+    const [currentPath, setCurrentPath] = useState("");
 
     const fetchDirectory = async () => {
         const data = await fetchFolder(currentPath);
@@ -23,6 +23,8 @@ function SystemSideBar(props) {
     }
 
     useEffect(() => {
+        if(props.keyword) return;
+
         console.log('FetchFolder', currentPath)
         fetchDirectory();
     }, [currentPath]);
@@ -35,7 +37,7 @@ function SystemSideBar(props) {
                         key={formatFolderPath(folder)} 
                         className="align-center" 
                         onClick={() => setCurrentPath(formatFolderPath(folder))}>
-                            <img src="images/folder-icon.png" alt=""/>
+                            <img src="images/folder-icon.png" title={folder.path}/>
                             {folder.name}
                     </div>
                 ))
@@ -43,7 +45,7 @@ function SystemSideBar(props) {
             {
                 files?.map(file => (
                     <div className="align-center" key={file.name}>
-                        <img src="images/apps/textedit.png" alt=""/>
+                        <img src="images/apps/textedit.png" title={file.data}/>
                         {file.name}
                     </div>
                 ))
