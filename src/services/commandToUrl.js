@@ -19,6 +19,14 @@ export default {
         method: "DELETE",
         url: "/resources/rm"
     },
+    "up": {
+        method: "PUT",
+        url: "/resources/up"
+    },
+    "find": {
+        method: "GET",
+        url: "/resources/find"
+    },
     "roots": {
         method: "GET",
         url: "/folders/roots"

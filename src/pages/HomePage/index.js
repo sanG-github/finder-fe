@@ -1,9 +1,29 @@
 import {useState} from 'react';
+import {fetchFolder} from '../../services/callApi';
+import {DebounceInput} from 'react-debounce-input';
+
 import Terminal from '../Terminal'
 import SystemSideBar from '../SystemSideBar'
 
 function HomePage() {
-    const [currentPath, setCurrentPath] = useState("");
+    const [state, setState] = useState({});
+    const [click, setClick] = useState(1);
+
+    const handleSearch = async (keyword) => {
+        if(!keyword){
+            setState({});
+            setClick(1);
+            return;
+        }
+
+        const response = await fetchFolder(keyword, true);
+        let newState = response;
+        newState["keyword"] = keyword;
+        
+        console.log(response);
+        setState(newState);
+        setClick(click + 1);
+    }
 
     return (
         <div>
@@ -581,7 +601,12 @@ function HomePage() {
                                     </div>
                                 </div>
                                 <div className="search-menu-bar">
-                                    <input type="text" placeholder="Search"/>
+                                    <DebounceInput
+                                        type="text" 
+                                        debounceTimeout={500}
+                                        placeholder="Search folders/files"
+                                        onChange={(e) => handleSearch(e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -593,7 +618,7 @@ function HomePage() {
                                     <div className="item-category">
                                         Favourites
                                     </div>
-                                    <div className="item-selected" onClick={() => {setCurrentPath("")}}>
+                                    <div className="item-selected" onClick={() => {setClick(click+1)}}>
                                         <img src="images/menu/airdrop.png" alt=""/>
                                         <a href="#" >File system</a>
                                     </div>
@@ -637,7 +662,12 @@ function HomePage() {
                             </div>
                         </div>
                         <div className="box-main" id="main-box">
-                            <SystemSideBar currentPath={currentPath} setCurrentPath={setCurrentPath} />
+                            <SystemSideBar
+                                key={click}
+                                keyword={state.keyword}
+                                folders={state.sub_folders}
+                                files={state.files}
+                            />
                             <div id="sidebar-recents" className="app-layout hide">
                                 <div className="align-center"><img src="images/apps/recents/camera.svg" alt=""/>Camera</div>
                                 <div className="align-center"><img src="images/apps/recents/notes.png" alt=""/>Notes</div>
