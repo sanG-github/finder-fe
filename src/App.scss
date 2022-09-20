@@ -874,7 +874,12 @@ button:hover {
 
     .file, .folder {
       display: flex;
+      margin-left: 2rem;
       justify-content: space-evenly;
+
+      & > p {
+        flex: 1;
+      }
     }
     .name {
       font-weight: bold;

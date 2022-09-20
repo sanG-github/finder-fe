@@ -49,6 +49,29 @@ function responseGetRequest(command, data) {
                 <p className='content'>{data.data}</p>
             </div>
         )
+    } else if (cmd_prefix === 'find'){
+        return (
+            <div className='response-wrapper'>
+                {
+                    data.sub_folders?.map(folder => (
+                        <div className='folder'>
+                            <p>Folder</p>
+                            <p className='name'>{folder.name}</p>
+                            <p className='size'>{folder.path}</p>
+                        </div>
+                    ))
+                }
+                {
+                    data.files?.map(file => (
+                        <div className='file'>
+                            <p>File</p>
+                            <p className='name'>{file.name}</p>
+                            <p className='size'>{file.data}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        ) 
     }
 }
 
