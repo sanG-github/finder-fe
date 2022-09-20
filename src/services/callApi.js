@@ -84,4 +84,35 @@ async function callApi(command) {
     return response;
 }
 
+export async function fetchFolder(folder_name) {
+    let command = "ls " + folder_name;
+    let api_info = {};
+
+    if(!folder_name){
+        api_info = parseCommand("roots");
+    } else {
+        api_info = parseCommand(command);
+    }
+
+    const response = await axios({
+        method: api_info.method,
+        url: baseApi + api_info.url,
+        params: {
+            cmd: command
+        },
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        },
+    }).then(res => {
+        return res.data;
+    }).catch(err => {
+        const message = err.response?.data?.message;
+        
+        return failureMessage(message);
+    })
+
+    return response;
+}
+
 export default callApi;
